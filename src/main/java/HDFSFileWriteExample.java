@@ -10,9 +10,12 @@ import org.apache.hadoop.fs.Path;
 public class HDFSFileWriteExample {
 
     public static void main(String[] args) {
+        //设置HADOOP_USER_NAME这个环境变量的值为hadoop环境中的用户，不设置的话会出现
+        //org.apache.hadoop.security.AccessControlException异常
+        System.setProperty("HADOOP_USER_NAME","hadoop");
         try {
             Configuration conf = new Configuration();
-            conf.set("fs.defaultFS", "hdfs://localhost:9000");
+            conf.set("fs.defaultFS", "hdfs://172.17.243.181:9000");
             conf.set("fs.hdfs.impl", "org.apache.hadoop.hdfs.DistributedFileSystem");
 
             FileSystem fs = FileSystem.get(conf);
